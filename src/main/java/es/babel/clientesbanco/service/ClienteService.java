@@ -29,9 +29,12 @@ public class ClienteService implements IClienteService {
 
     @Override
     public Cliente obtenerClientePorId(String dni) {
-        return fakeBD.getClientes().stream()
-                .filter(cliente -> cliente.getDni().equals(dni))
-                .findFirst()
-                .orElse(null);
+        for (Cliente cliente : fakeBD.getClientes()) {
+            if (cliente.getDni().equals(dni)) {
+                return cliente;
+            }
+        }
+        return null;
     }
+
 }

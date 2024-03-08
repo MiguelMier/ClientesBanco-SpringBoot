@@ -7,6 +7,7 @@ import java.util.List;
 public interface ICuentaService {
 
     List<Cuenta> obtenerCuentasPorCliente(String dni);
+    List<Cuenta> obtenerCuentas();
     Cuenta crearCuentaBancaria(Cuenta cuentaBancaria);
     void realizarIngreso(String iban, double cantidad);
     void realizarRetirada(String iban, double cantidad);

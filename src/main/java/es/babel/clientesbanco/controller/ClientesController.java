@@ -33,8 +33,13 @@ public class ClientesController {
         return clienteService.obtenerTodosClientes();
     }
 
-    @PostMapping("/clientes")
-    public Cliente crearCliente(@RequestBody Cliente cliente) {
+    @GetMapping("/cuentas")
+    public List<Cuenta> obtenerTodasCuentas() {
+        return cuentaService.obtenerCuentas();
+    }
+
+    @PostMapping("/clientes/add")
+    public Cliente crearCliente(@RequestParam("cliente") Cliente cliente) {
         return clienteService.crearCliente(cliente);
     }
 
@@ -48,18 +53,23 @@ public class ClientesController {
         return cuentaService.obtenerCuentasPorCliente(dni);
     }
 
-    @PostMapping("/cuentas")
+    @PostMapping("/cuentas/add")
     public Cuenta crearCuentaBancaria(@RequestBody Cuenta cuentaBancaria) {
         return cuentaService.crearCuentaBancaria(cuentaBancaria);
     }
 
-    @GetMapping("/movimientos/{cuentaId}")
-    public List<Movimiento> obtenerMovimientosPorCuenta(@PathVariable Long cuentaId) {
-        return movimientoService.obtenerMovimientosPorCuenta(cuentaId);
+    @GetMapping("/movimientos/porcuenta/{cuentaId}")
+    public List<Movimiento> obtenerMovimientosPorCuenta(@PathVariable String iban) {
+        return movimientoService.obtenerMovimientosPorCuenta(iban);
     }
 
     @PostMapping("/movimientos/{cuentaId}")
     public void registrarMovimiento(@PathVariable String dni, @RequestBody Movimiento movimiento) {
         movimientoService.registrarMovimiento(dni, movimiento.getCantidad());
+    }
+
+    @PostMapping("movimientos/ingreso")
+    public void realizarIngreso(@PathVariable String dni, @PathVariable double cantidad){
+        cuentaService.realizarIngreso(dni, cantidad);
     }
 }

@@ -50,4 +50,12 @@ public class Cuenta {
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
+
+    public List<Movimiento> getMovimientos() {
+        return movimientos;
+    }
+
+    public void setMovimientos(List<Movimiento> movimientos) {
+        this.movimientos = movimientos;
+    }
 }

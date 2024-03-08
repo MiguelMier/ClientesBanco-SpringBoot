@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface IMovimientoService {
 
-    List<Movimiento> obtenerMovimientosPorCuenta(Long cuentaId);
+    List<Movimiento> obtenerMovimientosPorCuenta(String iban);
     void registrarMovimiento(String iban, double cantidad);
 }

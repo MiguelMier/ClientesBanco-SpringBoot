@@ -24,6 +24,12 @@ public class CuentaService implements ICuentaService {
     }
 
     @Override
+    public List<Cuenta> obtenerCuentas() {
+
+        return fakeBD.getCuentas();
+    }
+
+    @Override
     public Cuenta crearCuentaBancaria(Cuenta cuentaBancaria) {
         fakeBD.getCuentas().add(cuentaBancaria);
         return cuentaBancaria;
@@ -31,45 +37,63 @@ public class CuentaService implements ICuentaService {
 
     @Override
     public void realizarIngreso(String dni, double cantidad) {
-        Optional<Cliente> clienteOptional = fakeBD.getClientes().stream()
-                .filter(cliente -> cliente.getDni().equals(dni))
-                .findFirst();
+        Cliente clienteEncontrado = null;
 
-        clienteOptional.ifPresent(cliente -> {
-            Cuenta cuentaBancaria = cliente.getCuentas().get(0); // Obtén la cuenta asociada al cliente
+        for (Cliente cliente : fakeBD.getClientes()) {
+            if (cliente.getDni().equals(dni)) {
+                clienteEncontrado = cliente;
+                break;
+            }
+        }
+
+        if (clienteEncontrado != null) {
+            Cuenta cuentaBancaria = clienteEncontrado.getCuentas().get(0);
             cuentaBancaria.setSaldo(cuentaBancaria.getSaldo() + cantidad);
-            fakeBD.getMovimientos().add(new Movimiento(cantidad,cuentaBancaria.getIban()));
-        });
+            fakeBD.getMovimientos().add(new Movimiento(cantidad, cuentaBancaria.getIban()));
+        }
     }
 
     @Override
     public void realizarRetirada(String dni, double cantidad) {
-        Optional<Cliente> clienteOptional = fakeBD.getClientes().stream()
-                .filter(cliente -> cliente.getDni().equals(dni))
-                .findFirst();
+        Cliente clienteEncontrado = null;
 
-        clienteOptional.ifPresent(cliente -> {
-            Cuenta cuentaBancaria = cliente.getCuentas().get(0); // Obtén la cuenta asociada al cliente
+        for (Cliente cliente : fakeBD.getClientes()) {
+            if (cliente.getDni().equals(dni)) {
+                clienteEncontrado = cliente;
+                break;
+            }
+        }
+
+        if (clienteEncontrado != null) {
+            Cuenta cuentaBancaria = clienteEncontrado.getCuentas().get(0);
 
             if (cuentaBancaria.getSaldo() >= cantidad) {
                 cuentaBancaria.setSaldo(cuentaBancaria.getSaldo() - cantidad);
-                fakeBD.getMovimientos().add(new Movimiento(-cantidad,cuentaBancaria.getIban()));
+                fakeBD.getMovimientos().add(new Movimiento(-cantidad, cuentaBancaria.getIban()));
             }
-        });
+        }
     }
 
     @Override
     public void realizarTransferencia(String dniOrigen, String dniDestino, double cantidad) {
-        Optional<Cliente> clienteOrigenOptional = fakeBD.getClientes().stream()
-                .filter(cliente -> cliente.getDni().equals(dniOrigen))
-                .findFirst();
-        Optional<Cliente> clienteDestinoOptional = fakeBD.getClientes().stream()
-                .filter(cliente -> cliente.getDni().equals(dniDestino))
-                .findFirst();
+        Cliente clienteOrigenEncontrado = null;
+        Cliente clienteDestinoEncontrado = null;
 
-        if (clienteOrigenOptional.isPresent() && clienteDestinoOptional.isPresent()) {
-            Cuenta cuentaOrigen = clienteOrigenOptional.get().getCuentas().get(0);
-            Cuenta cuentaDestino = clienteDestinoOptional.get().getCuentas().get(0);
+        for (Cliente cliente : fakeBD.getClientes()) {
+            if (cliente.getDni().equals(dniOrigen)) {
+                clienteOrigenEncontrado = cliente;
+            } else if (cliente.getDni().equals(dniDestino)) {
+                clienteDestinoEncontrado = cliente;
+            }
+
+            if (clienteOrigenEncontrado != null && clienteDestinoEncontrado != null) {
+                break;
+            }
+        }
+
+        if (clienteOrigenEncontrado != null && clienteDestinoEncontrado != null) {
+            Cuenta cuentaOrigen = clienteOrigenEncontrado.getCuentas().get(0);
+            Cuenta cuentaDestino = clienteDestinoEncontrado.getCuentas().get(0);
 
             if (cuentaOrigen.getSaldo() >= cantidad) {
                 cuentaOrigen.setSaldo(cuentaOrigen.getSaldo() - cantidad);
