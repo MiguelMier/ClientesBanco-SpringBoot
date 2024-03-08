@@ -1,4 +1,4 @@
-package es.babel.clientesbanco.service;
+package es.babel.clientesbanco.service.interfaces;
 
 import es.babel.clientesbanco.model.Cliente;
 

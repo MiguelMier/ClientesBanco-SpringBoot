@@ -2,12 +2,13 @@ package es.babel.clientesbanco.service;
 
 import es.babel.clientesbanco.fakebd.FakeBD;
 import es.babel.clientesbanco.model.Cliente;
+import es.babel.clientesbanco.service.interfaces.IClienteService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ClienteService implements IClienteService{
+public class ClienteService implements IClienteService {
 
     private FakeBD fakeBD;
 
@@ -28,6 +29,9 @@ public class ClienteService implements IClienteService{
 
     @Override
     public Cliente obtenerClientePorId(String dni) {
-        return null;
+        return fakeBD.getClientes().stream()
+                .filter(cliente -> cliente.getDni().equals(dni))
+                .findFirst()
+                .orElse(null);
     }
 }

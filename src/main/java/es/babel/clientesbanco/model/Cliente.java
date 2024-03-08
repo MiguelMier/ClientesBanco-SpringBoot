@@ -40,4 +40,12 @@ public class Cliente {
     public void setDni(String dni) {
         this.dni = dni;
     }
+
+    public List<Cuenta> getCuentas() {
+        return cuentas;
+    }
+
+    public void setCuentas(List<Cuenta> cuentas) {
+        this.cuentas = cuentas;
+    }
 }

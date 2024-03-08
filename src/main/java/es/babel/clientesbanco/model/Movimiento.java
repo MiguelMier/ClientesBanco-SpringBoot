@@ -1,7 +1,7 @@
 package es.babel.clientesbanco.model;
 
 public class Movimiento {
-    private Long id;
+    private String codigo;
     private double cantidad;
     private Cuenta cuentaBancaria;
 
@@ -12,12 +12,17 @@ public class Movimiento {
         this.cantidad = cantidad;
     }
 
-    public Long getId() {
-        return id;
+    public Movimiento(double cantidad, String codigo) {
+        this.cantidad = cantidad;
+        this.codigo = codigo;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public double getCantidad() {
