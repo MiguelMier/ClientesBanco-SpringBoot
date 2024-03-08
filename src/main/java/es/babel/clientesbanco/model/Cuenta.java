@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Cuenta {
 
-    private Cliente cliente;
     private String iban;
     private double saldo;
     private List<Movimiento> movimientos;
@@ -24,15 +23,6 @@ public class Cuenta {
 
     public void agregarMovimiento(Movimiento movimiento) {
         movimientos.add(movimiento);
-        movimiento.setCuentaBancaria(this);
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
 
     public String getIban() {

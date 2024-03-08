@@ -18,14 +18,19 @@ public class CuentaService implements ICuentaService {
     public CuentaService(FakeBD fakeBD){
         this.fakeBD = fakeBD;
     }
+
     @Override
     public List<Cuenta> obtenerCuentasPorCliente(String dni) {
+        Cliente cliente = buscarClientePorDni(dni);
+        if(cliente != null){
+            return cliente.getCuentas();
+        }
+
         return null;
     }
 
     @Override
     public List<Cuenta> obtenerCuentas() {
-
         return fakeBD.getCuentas();
     }
 
@@ -37,71 +42,71 @@ public class CuentaService implements ICuentaService {
 
     @Override
     public void realizarIngreso(String dni, double cantidad) {
-        Cliente clienteEncontrado = null;
-
-        for (Cliente cliente : fakeBD.getClientes()) {
-            if (cliente.getDni().equals(dni)) {
-                clienteEncontrado = cliente;
-                break;
-            }
-        }
+        Cliente clienteEncontrado = buscarClientePorDni(dni);
 
         if (clienteEncontrado != null) {
             Cuenta cuentaBancaria = clienteEncontrado.getCuentas().get(0);
-            cuentaBancaria.setSaldo(cuentaBancaria.getSaldo() + cantidad);
-            fakeBD.getMovimientos().add(new Movimiento(cantidad, cuentaBancaria.getIban()));
+            realizarMovimiento(cantidad, cuentaBancaria);
         }
     }
 
     @Override
     public void realizarRetirada(String dni, double cantidad) {
-        Cliente clienteEncontrado = null;
-
-        for (Cliente cliente : fakeBD.getClientes()) {
-            if (cliente.getDni().equals(dni)) {
-                clienteEncontrado = cliente;
-                break;
-            }
-        }
+        Cliente clienteEncontrado = buscarClientePorDni(dni);
 
         if (clienteEncontrado != null) {
             Cuenta cuentaBancaria = clienteEncontrado.getCuentas().get(0);
-
             if (cuentaBancaria.getSaldo() >= cantidad) {
-                cuentaBancaria.setSaldo(cuentaBancaria.getSaldo() - cantidad);
-                fakeBD.getMovimientos().add(new Movimiento(-cantidad, cuentaBancaria.getIban()));
+                realizarMovimiento(-cantidad, cuentaBancaria);
             }
         }
     }
 
     @Override
     public void realizarTransferencia(String dniOrigen, String dniDestino, double cantidad) {
-        Cliente clienteOrigenEncontrado = null;
-        Cliente clienteDestinoEncontrado = null;
+        Cliente clienteOrigen = buscarClientePorDni(dniOrigen);
+        Cliente clienteDestino = buscarClientePorDni(dniDestino);
 
-        for (Cliente cliente : fakeBD.getClientes()) {
-            if (cliente.getDni().equals(dniOrigen)) {
-                clienteOrigenEncontrado = cliente;
-            } else if (cliente.getDni().equals(dniDestino)) {
-                clienteDestinoEncontrado = cliente;
-            }
-
-            if (clienteOrigenEncontrado != null && clienteDestinoEncontrado != null) {
-                break;
-            }
-        }
-
-        if (clienteOrigenEncontrado != null && clienteDestinoEncontrado != null) {
-            Cuenta cuentaOrigen = clienteOrigenEncontrado.getCuentas().get(0);
-            Cuenta cuentaDestino = clienteDestinoEncontrado.getCuentas().get(0);
+        if (clienteOrigen != null && clienteDestino != null) {
+            Cuenta cuentaOrigen = clienteOrigen.getCuentas().get(0);
+            Cuenta cuentaDestino = clienteDestino.getCuentas().get(0);
 
             if (cuentaOrigen.getSaldo() >= cantidad) {
                 cuentaOrigen.setSaldo(cuentaOrigen.getSaldo() - cantidad);
                 cuentaDestino.setSaldo(cuentaDestino.getSaldo() + cantidad);
 
-                fakeBD.getMovimientos().add(new Movimiento(-cantidad, cuentaOrigen.getIban()));
-                fakeBD.getMovimientos().add(new Movimiento(cantidad, cuentaDestino.getIban()));
+                realizarMovimiento(-cantidad, cuentaOrigen);
+                realizarMovimiento(cantidad, cuentaDestino);
+
+                if (!sonMismaEntidadBancaria(cuentaOrigen, cuentaDestino)) {
+                    aplicarInteresTransferenciaExterna(cantidad, cuentaDestino);
+                }
             }
         }
     }
+
+    private void realizarMovimiento(double cantidad, Cuenta cuenta) {
+        cuenta.setSaldo(cuenta.getSaldo() + cantidad);
+        fakeBD.getMovimientos().add(new Movimiento(cantidad, cuenta.getIban()));
+    }
+
+    private Cliente buscarClientePorDni(String dni) {
+        for (Cliente cliente : fakeBD.getClientes()) {
+            if (cliente.getDni().equals(dni)) {
+                return cliente;
+            }
+        }
+        return null;
+    }
+
+    private boolean sonMismaEntidadBancaria(Cuenta cuentaOrigen, Cuenta cuentaDestino) {
+        return cuentaOrigen.getIban().startsWith("ES") && cuentaDestino.getIban().startsWith("ES");
+    }
+
+    private void aplicarInteresTransferenciaExterna(double cantidad, Cuenta cuentaDestino) {
+        double interes = 3.99;
+        realizarMovimiento(-interes, cuentaDestino);
+        fakeBD.getMovimientos().add(new Movimiento(-interes, cuentaDestino.getIban()));
+    }
+
 }

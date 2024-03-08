@@ -18,10 +18,10 @@ public class ClientesController {
     private ClienteService clienteService;
     private CuentaService cuentaService;
     private MovimientoService movimientoService;
-    private FakeBD fakeBD;
+    private final FakeBD fakeBD = new FakeBD();;
 
     public ClientesController() {
-        this.fakeBD = new FakeBD();
+        //this.fakeBD= new FakeBD();
         this.clienteService = new ClienteService(fakeBD);
         this.cuentaService = new CuentaService(fakeBD);
         this.movimientoService = new MovimientoService(fakeBD);
@@ -33,23 +33,23 @@ public class ClientesController {
         return clienteService.obtenerTodosClientes();
     }
 
-    @GetMapping("/cuentas")
-    public List<Cuenta> obtenerTodasCuentas() {
-        return cuentaService.obtenerCuentas();
-    }
-
     @PostMapping("/clientes/add")
     public Cliente crearCliente(@RequestParam("cliente") Cliente cliente) {
         return clienteService.crearCliente(cliente);
     }
 
     @GetMapping("/clientes/{clienteId}")
-    public Cliente obtenerClientePorId(@PathVariable String dni) {
+    public Cliente obtenerClientePorId(@RequestParam("cliente") String dni) {
         return clienteService.obtenerClientePorId(dni);
     }
 
+    @GetMapping("/cuentas")
+    public List<Cuenta> obtenerTodasCuentas() {
+        return cuentaService.obtenerCuentas();
+    }
+
     @GetMapping("/cuentas/{clienteId}")
-    public List<Cuenta> obtenerCuentasPorCliente(@PathVariable String dni) {
+    public List<Cuenta> obtenerCuentasPorCliente(@RequestParam("cliente") String dni) {
         return cuentaService.obtenerCuentasPorCliente(dni);
     }
 
@@ -59,17 +59,17 @@ public class ClientesController {
     }
 
     @GetMapping("/movimientos/porcuenta/{cuentaId}")
-    public List<Movimiento> obtenerMovimientosPorCuenta(@PathVariable String iban) {
+    public List<Movimiento> obtenerMovimientosPorCuenta(@RequestParam("IBAN") String iban) {
         return movimientoService.obtenerMovimientosPorCuenta(iban);
     }
 
     @PostMapping("/movimientos/{cuentaId}")
-    public void registrarMovimiento(@PathVariable String dni, @RequestBody Movimiento movimiento) {
+    public void registrarMovimiento(@RequestParam("cliente") String dni, @RequestParam("movimiento") Movimiento movimiento) {
         movimientoService.registrarMovimiento(dni, movimiento.getCantidad());
     }
 
     @PostMapping("movimientos/ingreso")
-    public void realizarIngreso(@PathVariable String dni, @PathVariable double cantidad){
+    public void realizarIngreso(@RequestParam("cliente") String dni, @RequestParam("cantidad") double cantidad){
         cuentaService.realizarIngreso(dni, cantidad);
     }
 }

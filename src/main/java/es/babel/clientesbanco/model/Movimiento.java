@@ -3,7 +3,6 @@ package es.babel.clientesbanco.model;
 public class Movimiento {
     private String codigo;
     private double cantidad;
-    private Cuenta cuentaBancaria;
 
     public Movimiento() {
     }
@@ -33,11 +32,4 @@ public class Movimiento {
         this.cantidad = cantidad;
     }
 
-    public Cuenta getCuentaBancaria() {
-        return cuentaBancaria;
-    }
-
-    public void setCuentaBancaria(Cuenta cuentaBancaria) {
-        this.cuentaBancaria = cuentaBancaria;
-    }
 }

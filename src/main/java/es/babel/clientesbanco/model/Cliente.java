@@ -22,7 +22,6 @@ public class Cliente {
 
     public void agregarCuenta(Cuenta cuenta) {
         cuentas.add(cuenta);
-        cuenta.setCliente(this);
     }
 
     public String getNombre() {
