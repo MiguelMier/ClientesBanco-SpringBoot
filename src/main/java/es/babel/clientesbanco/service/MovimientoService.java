@@ -4,6 +4,8 @@ import es.babel.clientesbanco.fakebd.FakeBD;
 import es.babel.clientesbanco.model.Cuenta;
 import es.babel.clientesbanco.model.Movimiento;
 import es.babel.clientesbanco.service.interfaces.IMovimientoService;
+import es.babel.clientesbanco.utils.LogUtils;
+import org.apache.juli.logging.Log;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.List;
 public class MovimientoService implements IMovimientoService {
 
     private FakeBD fakeBD;
+    private final LogUtils loggerr = new LogUtils();
 
     public MovimientoService(FakeBD fakeBD){
         this.fakeBD = fakeBD;

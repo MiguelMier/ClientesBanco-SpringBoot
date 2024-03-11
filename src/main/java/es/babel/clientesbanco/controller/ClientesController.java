@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/banco")
+@RequestMapping("/clientes")
 public class ClientesController {
 
 
@@ -29,48 +29,20 @@ public class ClientesController {
 
     }
 
-    @GetMapping("/clientes")
+    @GetMapping
     public List<Cliente> obtenerTodosClientes() {
         return clienteService.obtenerTodosClientes();
     }
 
-    @PostMapping("/clientes/add")
+    @PostMapping("/add")
     public Cliente crearCliente(@RequestBody Cliente cliente) {
         return clienteService.crearCliente(cliente);
     }
 
-    @GetMapping("/clientes/{clienteId}")
+    @GetMapping("/{clienteId}")
     public Cliente obtenerClientePorId(@RequestParam("cliente") String dni) {
         return clienteService.obtenerClientePorId(dni);
     }
 
-    @GetMapping("/cuentas")
-    public List<Cuenta> obtenerTodasCuentas() {
-        return cuentaService.obtenerCuentas();
-    }
 
-    @GetMapping("/cuentas/{clienteId}")
-    public List<Cuenta> obtenerCuentasPorCliente(@RequestParam("cliente") String dni) {
-        return cuentaService.obtenerCuentasPorCliente(dni);
-    }
-
-    @PostMapping("/cuentas/add")
-    public Cuenta crearCuentaBancaria(@RequestBody Cuenta cuentaBancaria) {
-        return cuentaService.crearCuentaBancaria(cuentaBancaria);
-    }
-
-    @GetMapping("/movimientos/porcuenta/{cuentaId}")
-    public List<Movimiento> obtenerMovimientosPorCuenta(@RequestParam("IBAN") String iban) {
-        return movimientoService.obtenerMovimientosPorCuenta(iban);
-    }
-
-    @PostMapping("/movimientos/{cuentaId}")
-    public void registrarMovimiento(@RequestBody String dni, @RequestBody Movimiento movimiento) {
-        movimientoService.registrarMovimiento(dni, movimiento.getCantidad());
-    }
-
-    @PostMapping("movimientos/ingreso")
-    public void realizarIngreso(@RequestBody String dni, @RequestBody double cantidad){
-        cuentaService.realizarIngreso(dni, cantidad);
-    }
 }
