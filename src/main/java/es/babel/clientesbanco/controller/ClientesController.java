@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/banco")
 public class ClientesController {
 
 
@@ -34,7 +35,7 @@ public class ClientesController {
     }
 
     @PostMapping("/clientes/add")
-    public Cliente crearCliente(@RequestParam("cliente") Cliente cliente) {
+    public Cliente crearCliente(@RequestBody Cliente cliente) {
         return clienteService.crearCliente(cliente);
     }
 
@@ -64,12 +65,12 @@ public class ClientesController {
     }
 
     @PostMapping("/movimientos/{cuentaId}")
-    public void registrarMovimiento(@RequestParam("cliente") String dni, @RequestParam("movimiento") Movimiento movimiento) {
+    public void registrarMovimiento(@RequestBody String dni, @RequestBody Movimiento movimiento) {
         movimientoService.registrarMovimiento(dni, movimiento.getCantidad());
     }
 
     @PostMapping("movimientos/ingreso")
-    public void realizarIngreso(@RequestParam("cliente") String dni, @RequestParam("cantidad") double cantidad){
+    public void realizarIngreso(@RequestBody String dni, @RequestBody double cantidad){
         cuentaService.realizarIngreso(dni, cantidad);
     }
 }
