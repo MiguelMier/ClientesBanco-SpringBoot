@@ -9,7 +9,6 @@ import es.babel.clientesbanco.utils.LogUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CuentaService implements ICuentaService {
@@ -24,7 +23,7 @@ public class CuentaService implements ICuentaService {
     public List<Cuenta> obtenerCuentasPorCliente(String dni) {
         Cliente cliente = buscarClientePorDni(dni);
         if(cliente != null){
-            LogUtils.loginfo(" --> Cuentas obtenidas del cliente: " + dni);
+            LogUtils.logInfo(" --> Cuentas obtenidas del cliente: " + dni);
             return cliente.getCuentas();
         }
         LogUtils.logEror("ERROR: Cuentas no encontradas");
@@ -33,14 +32,14 @@ public class CuentaService implements ICuentaService {
 
     @Override
     public List<Cuenta> obtenerCuentas() {
-        LogUtils.loginfo(" --> Cuentas obtenidas");
+        LogUtils.logInfo(" --> Cuentas obtenidas");
         return fakeBD.getCuentas();
     }
 
     @Override
     public Cuenta crearCuentaBancaria(Cuenta cuentaBancaria) {
         fakeBD.getCuentas().add(cuentaBancaria);
-        LogUtils.loginfo(" --> Cuenta creada correctamente");
+        LogUtils.logInfo(" --> Cuenta creada correctamente");
         return cuentaBancaria;
     }
 
@@ -51,6 +50,8 @@ public class CuentaService implements ICuentaService {
         if (clienteEncontrado != null) {
             Cuenta cuentaBancaria = clienteEncontrado.getCuentas().get(0);
             realizarMovimiento(cantidad, cuentaBancaria);
+            LogUtils.logInfo(" --> Ingreso realizado correctamente en la cuenta de: "+ dni
+                    + " con cantidad: " + cantidad);
         }
     }
 
@@ -62,6 +63,8 @@ public class CuentaService implements ICuentaService {
             Cuenta cuentaBancaria = clienteEncontrado.getCuentas().get(0);
             if (cuentaBancaria.getSaldo() >= cantidad) {
                 realizarMovimiento(-cantidad, cuentaBancaria);
+                LogUtils.logInfo(" --> Retirada realizada correctamente en la cuenta de: "+ dni
+                        + " con cantidad: " + cantidad);
             }
         }
     }

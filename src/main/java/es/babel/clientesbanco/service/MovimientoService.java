@@ -5,7 +5,6 @@ import es.babel.clientesbanco.model.Cuenta;
 import es.babel.clientesbanco.model.Movimiento;
 import es.babel.clientesbanco.service.interfaces.IMovimientoService;
 import es.babel.clientesbanco.utils.LogUtils;
-import org.apache.juli.logging.Log;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +13,6 @@ import java.util.List;
 public class MovimientoService implements IMovimientoService {
 
     private FakeBD fakeBD;
-    private final LogUtils loggerr = new LogUtils();
 
     public MovimientoService(FakeBD fakeBD){
         this.fakeBD = fakeBD;
@@ -26,7 +24,7 @@ public class MovimientoService implements IMovimientoService {
         for (Cuenta cuenta : fakeBD.getCuentas()) {
             if (cuenta.getIban().equals(iban)) {
                 cuentaBancaria = cuenta;
-                LogUtils.loginfo(" --> Movimientos obtenidos de la cuenta: " + iban);
+                LogUtils.logInfo(" --> Movimientos obtenidos de la cuenta: " + iban);
                 break;
             }
         }
@@ -45,7 +43,7 @@ public class MovimientoService implements IMovimientoService {
         for (Cuenta cuenta : fakeBD.getCuentas()) {
             if (cuenta.getIban().equals(iban)) {
                 cuentaBancaria = cuenta;
-                LogUtils.loginfo(" --> Movimientos registrados de la cuenta: " + iban);
+                LogUtils.logInfo(" --> Movimientos registrados de la cuenta: " + iban);
                 break;
             }
         }
@@ -58,5 +56,10 @@ public class MovimientoService implements IMovimientoService {
         Movimiento movimiento = new Movimiento(cantidad);
         cuentaBancaria.agregarMovimiento(movimiento);
         fakeBD.getMovimientos().add(movimiento);
+    }
+
+    public List<Movimiento> obtenerMovimientos(){
+        LogUtils.logInfo(" --> Movimientos obtenidos");
+        return fakeBD.getMovimientos();
     }
 }

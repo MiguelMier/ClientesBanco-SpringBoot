@@ -18,7 +18,7 @@ public class LogUtils {
         logger.debug(msg);
     }
 
-    public static void loginfo(String msg){
+    public static void logInfo(String msg){
         logger.info(msg);
     }
 

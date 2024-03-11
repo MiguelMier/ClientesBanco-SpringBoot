@@ -18,13 +18,14 @@ public class ClienteService implements IClienteService {
 
     @Override
     public List<Cliente> obtenerTodosClientes() {
+        LogUtils.logInfo(" --> Clientes obtenidos");
         return fakeBD.getClientes();
     }
 
     @Override
     public Cliente crearCliente(Cliente cliente) {
         fakeBD.getClientes().add(cliente);
-        LogUtils.loginfo("Cliente creado: " + cliente.toString());
+        LogUtils.logInfo("Cliente creado: " + cliente.toString());
         return cliente;
     }
 
@@ -32,7 +33,7 @@ public class ClienteService implements IClienteService {
     public Cliente obtenerClientePorId(String dni) {
         for (Cliente cliente : fakeBD.getClientes()) {
             if (cliente.getDni().equals(dni)) {
-                LogUtils.loginfo("Cliente obtenido: " + cliente.toString());
+                LogUtils.logInfo("Cliente obtenido: " + cliente.toString());
                 return cliente;
             }
         }

@@ -1,6 +1,7 @@
 package es.babel.clientesbanco.controller;
 
 import es.babel.clientesbanco.fakebd.FakeBD;
+import es.babel.clientesbanco.model.Cuenta;
 import es.babel.clientesbanco.model.Movimiento;
 import es.babel.clientesbanco.service.MovimientoService;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,11 @@ public class MovimientosController {
     public MovimientosController() {
         this.movimientoService = new MovimientoService(fakeBD);
 
+    }
+
+    @GetMapping
+    public List<Movimiento> obtenerMovimientos() {
+        return movimientoService.obtenerMovimientos();
     }
 
     @GetMapping("/porcuenta/{cuentaId}")
