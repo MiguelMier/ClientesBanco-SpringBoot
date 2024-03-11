@@ -17,7 +17,6 @@ public class CuentasController {
     private final FakeBD fakeBD = new FakeBD();
 
     public CuentasController() {
-        //this.fakeBD= new FakeBD();
         this.cuentaService = new CuentaService(fakeBD);
     }
 

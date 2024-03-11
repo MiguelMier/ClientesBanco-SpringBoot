@@ -85,6 +85,10 @@ public class CuentaService implements ICuentaService {
                 realizarMovimiento(-cantidad, cuentaOrigen);
                 realizarMovimiento(cantidad, cuentaDestino);
 
+                LogUtils.logInfo(" --> Transferencia realizada correctamente desde la cuenta de: "+ dniOrigen
+                        + " a la cuenta de: " + dniDestino
+                        + " con cantidad: " + cantidad);
+
                 if (!sonMismaEntidadBancaria(cuentaOrigen, cuentaDestino)) {
                     aplicarInteresTransferenciaExterna(cantidad, cuentaDestino);
                 }
@@ -114,6 +118,7 @@ public class CuentaService implements ICuentaService {
         double interes = 3.99;
         realizarMovimiento(-interes, cuentaDestino);
         fakeBD.getMovimientos().add(new Movimiento(-interes, cuentaDestino.getIban()));
+        LogUtils.logInfo(" --> Intereses aplicados correctamente (3.99€)");
     }
 
 }

@@ -1,32 +1,13 @@
-[INFO ] 2024-03-11 12:57:25.183 [main] ClientesbancoApplication - Starting ClientesbancoApplication using Java 17.0.10 with PID 20904 (C:\Users\miguel.mier\Desktop\BootCamp\Sesion 9\springboot\clientesbanco\clientesbanco\target\classes started by miguel.mier in C:\Users\miguel.mier\Desktop\BootCamp\Sesion 9\springboot\clientesbanco\clientesbanco)
-[INFO ] 2024-03-11 12:57:25.221 [main] ClientesbancoApplication - No active profile set, falling back to 1 default profile: "default"
-[INFO ] 2024-03-11 12:57:27.939 [main] Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-[INFO ] 2024-03-11 12:57:27.945 [main] StandardService - Starting service [Tomcat]
-[INFO ] 2024-03-11 12:57:27.946 [main] StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
-[INFO ] 2024-03-11 12:57:28.086 [main] [/] - Initializing Spring embedded WebApplicationContext
-[INFO ] 2024-03-11 12:57:29.006 [main] Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-[INFO ] 2024-03-11 12:57:29.134 [main] ClientesbancoApplication - Started ClientesbancoApplication in 4.905 seconds (process running for 7.064)
-[INFO ] 2024-03-11 12:58:17.296 [http-nio-8080-exec-3] [/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-[INFO ] 2024-03-11 12:58:24.372 [http-nio-8080-exec-7] ClienteService -  --> Cuentas obtenidas
-[INFO ] 2024-03-11 13:00:25.034 [main] ClientesbancoApplication - Starting ClientesbancoApplication using Java 17.0.10 with PID 16104 (C:\Users\miguel.mier\Desktop\BootCamp\Sesion 9\springboot\clientesbanco\clientesbanco\target\classes started by miguel.mier in C:\Users\miguel.mier\Desktop\BootCamp\Sesion 9\springboot\clientesbanco\clientesbanco)
-[INFO ] 2024-03-11 13:00:25.071 [main] ClientesbancoApplication - No active profile set, falling back to 1 default profile: "default"
-[INFO ] 2024-03-11 13:00:27.926 [main] Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-[INFO ] 2024-03-11 13:00:27.933 [main] StandardService - Starting service [Tomcat]
-[INFO ] 2024-03-11 13:00:27.934 [main] StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
-[INFO ] 2024-03-11 13:00:28.073 [main] [/] - Initializing Spring embedded WebApplicationContext
-[INFO ] 2024-03-11 13:00:29.252 [main] Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-[INFO ] 2024-03-11 13:00:29.356 [main] ClientesbancoApplication - Started ClientesbancoApplication in 5.241 seconds (process running for 7.295)
-[INFO ] 2024-03-11 13:00:32.582 [http-nio-8080-exec-1] [/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-[INFO ] 2024-03-11 13:00:38.707 [http-nio-8080-exec-6] ClienteService -  --> Cuentas obtenidas
-[INFO ] 2024-03-11 13:05:50.969 [main] ClientesbancoApplication - Starting ClientesbancoApplication using Java 17.0.10 with PID 16144 (C:\Users\miguel.mier\Desktop\BootCamp\Sesion 9\springboot\clientesbanco\clientesbanco\target\classes started by miguel.mier in C:\Users\miguel.mier\Desktop\BootCamp\Sesion 9\springboot\clientesbanco\clientesbanco)
-[INFO ] 2024-03-11 13:05:50.999 [main] ClientesbancoApplication - No active profile set, falling back to 1 default profile: "default"
-[INFO ] 2024-03-11 13:05:53.905 [main] Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-[INFO ] 2024-03-11 13:05:53.912 [main] StandardService - Starting service [Tomcat]
-[INFO ] 2024-03-11 13:05:53.913 [main] StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
-[INFO ] 2024-03-11 13:05:54.051 [main] [/] - Initializing Spring embedded WebApplicationContext
-[INFO ] 2024-03-11 13:05:55.228 [main] Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-[INFO ] 2024-03-11 13:05:55.349 [main] ClientesbancoApplication - Started ClientesbancoApplication in 5.273 seconds (process running for 7.22)
-[INFO ] 2024-03-11 13:05:55.622 [http-nio-8080-exec-3] [/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-[INFO ] 2024-03-11 13:05:55.707 [http-nio-8080-exec-3] ClienteService -  --> Cuentas obtenidas
-[INFO ] 2024-03-11 13:05:58.540 [http-nio-8080-exec-1] ClienteService -  --> Clientes obtenidos
-[INFO ] 2024-03-11 13:06:01.199 [http-nio-8080-exec-2] ClienteService -  --> Movimientos obtenidos
+[INFO ] 2024-03-11 13:15:09.608 [main] ClientesbancoApplication - Starting ClientesbancoApplication using Java 17.0.10 with PID 11084 (C:\Users\miguel.mier\Desktop\BootCamp\Sesion 9\springboot\clientesbanco\clientesbanco\target\classes started by miguel.mier in C:\Users\miguel.mier\Desktop\BootCamp\Sesion 9\springboot\clientesbanco\clientesbanco)
+[INFO ] 2024-03-11 13:15:09.644 [main] ClientesbancoApplication - No active profile set, falling back to 1 default profile: "default"
+[INFO ] 2024-03-11 13:15:12.281 [main] Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+[INFO ] 2024-03-11 13:15:12.287 [main] StandardService - Starting service [Tomcat]
+[INFO ] 2024-03-11 13:15:12.288 [main] StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+[INFO ] 2024-03-11 13:15:12.457 [main] [/] - Initializing Spring embedded WebApplicationContext
+[INFO ] 2024-03-11 13:15:13.457 [main] Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+[INFO ] 2024-03-11 13:15:13.545 [main] ClientesbancoApplication - Started ClientesbancoApplication in 4.941 seconds (process running for 7.049)
+[INFO ] 2024-03-11 13:15:18.959 [http-nio-8080-exec-1] [/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[INFO ] 2024-03-11 13:15:19.055 [http-nio-8080-exec-1] ClientesbancoApplication -  --> Movimientos obtenidos de la cuenta: ES98765432109876543210
+[INFO ] 2024-03-11 13:31:59.611 [main] ClientesbancoApplication - Starting ClientesbancoApplication using Java 17.0.10 with PID 12184 (C:\Users\miguel.mier\Desktop\BootCamp\Sesion 9\springboot\clientesbanco\clientesbanco\target\classes started by miguel.mier in C:\Users\miguel.mier\Desktop\BootCamp\Sesion 9\springboot\clientesbanco\clientesbanco)
+[INFO ] 2024-03-11 13:31:59.639 [main] ClientesbancoApplication - No active profile set, falling back to 1 default profile: "default"
+[INFO ] 2024-03-11 13:32:04.031 [main] ClientesbancoApplication - Started ClientesbancoApplication in 5.311 seconds (process running for 7.373)

@@ -1,6 +1,7 @@
 package es.babel.clientesbanco.utils;
 
 
+import es.babel.clientesbanco.ClientesbancoApplication;
 import es.babel.clientesbanco.service.ClienteService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 public class LogUtils {
 
-    public static final Logger logger = LogManager.getLogger(ClienteService.class);
+    public static final Logger logger = LogManager.getLogger(ClientesbancoApplication.class);
 
     public static void logEror(String msg){
         logger.error(msg);
