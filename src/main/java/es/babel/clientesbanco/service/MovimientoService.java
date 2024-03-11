@@ -26,11 +26,13 @@ public class MovimientoService implements IMovimientoService {
         for (Cuenta cuenta : fakeBD.getCuentas()) {
             if (cuenta.getIban().equals(iban)) {
                 cuentaBancaria = cuenta;
+                LogUtils.loginfo(" --> Movimientos obtenidos de la cuenta: " + iban);
                 break;
             }
         }
 
         if (cuentaBancaria == null) {
+            LogUtils.logEror(" ERROR: cuenta no encontrada");
             throw new RuntimeException("Cuenta no encontrada por IBAN: " + iban);
         }
 
@@ -43,11 +45,13 @@ public class MovimientoService implements IMovimientoService {
         for (Cuenta cuenta : fakeBD.getCuentas()) {
             if (cuenta.getIban().equals(iban)) {
                 cuentaBancaria = cuenta;
+                LogUtils.loginfo(" --> Movimientos registrados de la cuenta: " + iban);
                 break;
             }
         }
 
         if (cuentaBancaria == null) {
+            LogUtils.logEror(" ERROR: cuenta no encontrada");
             throw new RuntimeException("Cuenta no encontrada por IBAN: " + iban);
         }
 

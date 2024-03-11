@@ -5,6 +5,7 @@ import es.babel.clientesbanco.model.Cliente;
 import es.babel.clientesbanco.model.Cuenta;
 import es.babel.clientesbanco.model.Movimiento;
 import es.babel.clientesbanco.service.interfaces.ICuentaService;
+import es.babel.clientesbanco.utils.LogUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,20 +24,23 @@ public class CuentaService implements ICuentaService {
     public List<Cuenta> obtenerCuentasPorCliente(String dni) {
         Cliente cliente = buscarClientePorDni(dni);
         if(cliente != null){
+            LogUtils.loginfo(" --> Cuentas obtenidas del cliente: " + dni);
             return cliente.getCuentas();
         }
-
+        LogUtils.logEror("ERROR: Cuentas no encontradas");
         return null;
     }
 
     @Override
     public List<Cuenta> obtenerCuentas() {
+        LogUtils.loginfo(" --> Cuentas obtenidas");
         return fakeBD.getCuentas();
     }
 
     @Override
     public Cuenta crearCuentaBancaria(Cuenta cuentaBancaria) {
         fakeBD.getCuentas().add(cuentaBancaria);
+        LogUtils.loginfo(" --> Cuenta creada correctamente");
         return cuentaBancaria;
     }
 

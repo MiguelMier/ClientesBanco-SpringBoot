@@ -12,8 +12,6 @@ import java.util.List;
 public class ClienteService implements IClienteService {
 
     private FakeBD fakeBD;
-    private final LogUtils logger = new LogUtils();
-
     public ClienteService(FakeBD fakeBD){
         this.fakeBD = fakeBD;
     }
@@ -26,6 +24,7 @@ public class ClienteService implements IClienteService {
     @Override
     public Cliente crearCliente(Cliente cliente) {
         fakeBD.getClientes().add(cliente);
+        LogUtils.loginfo("Cliente creado: " + cliente.toString());
         return cliente;
     }
 
@@ -33,11 +32,11 @@ public class ClienteService implements IClienteService {
     public Cliente obtenerClientePorId(String dni) {
         for (Cliente cliente : fakeBD.getClientes()) {
             if (cliente.getDni().equals(dni)) {
-                logger.loginfo("Cliente obtenido: " + cliente.toString());
+                LogUtils.loginfo("Cliente obtenido: " + cliente.toString());
                 return cliente;
             }
         }
-        logger.logEror(" --> Error encontrando el cliente pasado");
+        LogUtils.logEror(" --> Error encontrando el cliente pasado");
         return null;
     }
 
