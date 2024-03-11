@@ -40,7 +40,7 @@ public class ClientesController {
     }
 
     @GetMapping("/{clienteId}")
-    public Cliente obtenerClientePorId(@RequestParam("cliente") String dni) {
+    public Cliente obtenerClientePorId(@RequestBody String dni) {
         return clienteService.obtenerClientePorId(dni);
     }
 

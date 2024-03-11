@@ -2,8 +2,6 @@ package es.babel.clientesbanco.controller;
 
 import es.babel.clientesbanco.fakebd.FakeBD;
 import es.babel.clientesbanco.model.Movimiento;
-import es.babel.clientesbanco.service.ClienteService;
-import es.babel.clientesbanco.service.CuentaService;
 import es.babel.clientesbanco.service.MovimientoService;
 import org.springframework.web.bind.annotation.*;
 
